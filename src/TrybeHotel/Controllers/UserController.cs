@@ -20,7 +20,7 @@ namespace TrybeHotel.Controllers
         {
             var user = HttpContext.User.Identity as ClaimsIdentity;
             var userType = user?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-            if (userType != "admin")
+            if (userType == null)
             {
                 return Unauthorized();
             }
