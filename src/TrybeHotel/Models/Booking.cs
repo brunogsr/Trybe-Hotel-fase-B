@@ -11,8 +11,9 @@ public class Booking
   public DateTime CheckOut { get; set; }
   public int GuestQuant { get; set; }
   [ForeignKey("UserId")]
-  public User? UserId { get; set; }
+  public int UserId { get; set; }
+  public virtual User? User { get; set; }
   [ForeignKey("RoomId")]
-  public Room? RoomId { get; set; }
-
+  public int RoomId { get; set; }
+  public virtual Room? Room { get; set; }
 }
