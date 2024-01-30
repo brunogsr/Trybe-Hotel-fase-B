@@ -35,7 +35,7 @@ namespace TrybeHotel.Controllers
 
             if (email != null)
             {
-                return Conflict("User email already exists");
+                return Conflict(new { message = "User email already exists" });
             }
 
             var addedUser = _repository.Add(user);
