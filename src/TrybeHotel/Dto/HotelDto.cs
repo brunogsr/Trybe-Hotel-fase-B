@@ -2,10 +2,11 @@ namespace TrybeHotel.Dto
 {
     public class HotelDto
     {
-        public int RoomId { get; set; }
+        public int HotelId { get; set; }
         public string? Name { get; set; }
-        public int Capacity { get; set; }
-        public string? Image { get; set; }
-        public HotelDto? Hotel { get; set; }
+        public string? Address { get; set; }
+        public int CityId { get; set; }
+        public string? CityName { get; set; }
+        public CityDto? City { get; set; }
     }
 }

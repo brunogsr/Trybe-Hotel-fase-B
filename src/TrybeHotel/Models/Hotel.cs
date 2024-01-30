@@ -9,8 +9,9 @@ public class Hotel
   public int HotelId { get; set; }
   public string? Name { get; set; }
   public string? Address { get; set; }
-  [ForeignKey("CityId")]
-  public City? CityId { get; set; }
-  public ICollection<Room>? Rooms { get; set; }
 
+  [ForeignKey("City")]  // Corrigido para usar o nome da propriedade de navegação
+  public int CityId { get; set; }
+  public City? City { get; set; }  // Adicionado para representar a relação de navegação
+  public ICollection<Room>? Rooms { get; set; }
 }

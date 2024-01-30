@@ -13,12 +13,41 @@ namespace TrybeHotel.Repository
 
         public IEnumerable<HotelDto> GetHotels()
         {
-            throw new NotImplementedException();
+            var hotelsList = _context.Hotels.ToList();
+            var hotelsDtoList = new List<HotelDto>();
+
+            foreach (var hotel in hotelsList)
+            {
+                hotelsDtoList.Add(new HotelDto
+                {
+                    HotelId = hotel.HotelId,
+                    Name = hotel.Name,
+                    City = new CityDto
+                    {
+                        CityId = hotel.City.CityId,
+                        Name = hotel.City.Name
+                    }
+                });
+            }
+
+            return hotelsDtoList;
         }
-        
+
         public HotelDto AddHotel(Hotel hotel)
         {
-            throw new NotImplementedException();
+            _context.Hotels.Add(hotel);
+            _context.SaveChanges();
+
+            return new HotelDto
+            {
+                HotelId = hotel.HotelId,
+                Name = hotel.Name,
+                City = new CityDto
+                {
+                    CityId = hotel.City.CityId,
+                    Name = hotel.City.Name
+                }
+            };
         }
     }
 }
