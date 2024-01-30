@@ -6,9 +6,6 @@ using System.Security.Claims;
 
 namespace TrybeHotel.Controllers
 {
-    [ApiController]
-    [Route("user")]
-    [Authorize(Roles = "Admin")]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _repository;
@@ -21,6 +18,12 @@ namespace TrybeHotel.Controllers
         [HttpGet]
         public IActionResult GetUsers()
         {
+            var user = HttpContext.User.Identity as ClaimsIdentity;
+            var userType = user?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+            if (userType != "admin")
+            {
+                return Unauthorized();
+            }
             var allUsers = _repository.GetUsers();
             return Ok(allUsers);
         }
