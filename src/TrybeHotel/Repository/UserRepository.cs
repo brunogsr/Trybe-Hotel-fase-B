@@ -26,7 +26,7 @@ namespace TrybeHotel.Repository
                 Name = user.Name,
                 Email = user.Email,
                 Password = user.Password,
-                UserType = "Client"
+                UserType = "client"
             };
             _context.Users.Add(newUser);
             _context.SaveChanges();
@@ -42,30 +42,29 @@ namespace TrybeHotel.Repository
         public UserDto GetUserByEmail(string userEmail)
         {
             var user = _context.Users.FirstOrDefault(u => u.Email == userEmail);
-            if (user == null)
+            if (user != null)
             {
-                return null;
+                return new UserDto
+                {
+                    UserId = user.UserId,
+                    Name = user.Name,
+                    Email = user.Email,
+                    UserType = user.UserType
+                };
             }
-            return new UserDto
-            {
-                UserId = user.UserId,
-                Name = user.Name,
-                Email = user.Email,
-                UserType = user.UserType
-            };
+            return null;
         }
 
         public IEnumerable<UserDto> GetUsers()
         {
-            var users = _context.Users.Select(u => new UserDto
+            var users = _context.Users.Select(u => new UserDto()
             {
                 UserId = u.UserId,
                 Name = u.Name,
                 Email = u.Email,
                 UserType = u.UserType
             });
-            return users;
+            return users.ToList();
         }
-
     }
 }
