@@ -12,16 +12,38 @@ namespace TrybeHotel.Repository
         }
         public UserDto GetUserById(int userId)
         {
-            throw new NotImplementedException();
+            var user = _context.Users.FirstOrDefault(u => u.UserId == userId);
+            if (user != null)
+            {
+                return new UserDto()
+                {
+                    UserId = user.UserId,
+                    Name = user.Name,
+                    Email = user.Email,
+                    UserType = user.UserType
+                };
+            }
+            return null;
         }
 
         public UserDto Login(LoginDto login)
         {
-            throw new NotImplementedException();
+            var user = _context.Users.FirstOrDefault(u => u.Email == login.Email && u.Password == login.Password);
+            if (user != null)
+            {
+                return new UserDto()
+                {
+                    UserId = user.UserId,
+                    Name = user.Name,
+                    Email = user.Email,
+                    UserType = user.UserType
+                };
+            }
+            return null;
         }
         public UserDto Add(UserDtoInsert user)
         {
-            var newUser = new User
+            var newUser = new User()
             {
                 Name = user.Name,
                 Email = user.Email,
@@ -30,7 +52,7 @@ namespace TrybeHotel.Repository
             };
             _context.Users.Add(newUser);
             _context.SaveChanges();
-            return new UserDto
+            return new UserDto()
             {
                 UserId = newUser.UserId,
                 Name = newUser.Name,
@@ -44,7 +66,7 @@ namespace TrybeHotel.Repository
             var user = _context.Users.FirstOrDefault(u => u.Email == userEmail);
             if (user != null)
             {
-                return new UserDto
+                return new UserDto()
                 {
                     UserId = user.UserId,
                     Name = user.Name,

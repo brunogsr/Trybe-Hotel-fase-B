@@ -6,6 +6,8 @@ using System.Security.Claims;
 
 namespace TrybeHotel.Controllers
 {
+    [ApiController]
+    [Route("user")]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _repository;
