@@ -21,7 +21,8 @@ namespace TrybeHotel.Controllers
         }
 
         [HttpPost]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Client")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Policy = "Client")]
         public IActionResult Add([FromBody] BookingDtoInsert bookingInsert)
         {
             throw new NotImplementedException();
@@ -29,7 +30,8 @@ namespace TrybeHotel.Controllers
 
 
         [HttpGet("{Bookingid}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "Client")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Policy = "Client")]
         public IActionResult GetBooking(int Bookingid)
         {
             throw new NotImplementedException();

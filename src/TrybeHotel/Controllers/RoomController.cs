@@ -24,12 +24,14 @@ namespace TrybeHotel.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "Admin")]
         public IActionResult PostRoom([FromBody] Room room)
         {
             return Created("room", _repository.AddRoom(room));
         }
 
         [HttpDelete("{RoomId}")]
+        [Authorize(Policy = "Admin")]
         public IActionResult Delete(int RoomId)
         {
             _repository.DeleteRoom(RoomId);
