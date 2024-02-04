@@ -26,7 +26,7 @@ namespace TrybeHotel.Controllers
         }
 
         [HttpPost]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "manager")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public IActionResult PostHotel([FromBody] Hotel hotel)
         {
             return Created("", _repository.AddHotel(hotel));
