@@ -4,6 +4,7 @@ using TrybeHotel.Repository;
 using TrybeHotel.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Security.Claims;
 
 namespace TrybeHotel.Controllers
 {
@@ -27,7 +28,12 @@ namespace TrybeHotel.Controllers
         [HttpPost]
         public IActionResult PostHotel([FromBody] Hotel hotel)
         {
-
+            // only admin
+            var role = User.FindFirst(ClaimTypes.Role)?.Value;
+            if (role != "admin")
+            {
+                return Unauthorized();
+            }
             return Created("hotel", _repository.AddHotel(hotel));
         }
 
