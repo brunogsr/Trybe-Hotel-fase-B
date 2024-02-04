@@ -26,15 +26,10 @@ namespace TrybeHotel.Controllers
         }
 
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "manager")]
         public IActionResult PostHotel([FromBody] Hotel hotel)
         {
-            // only admin
-            var role = User.FindFirst(ClaimTypes.Role)?.Value;
-            if (role != "admin")
-            {
-                return Unauthorized();
-            }
-            return Created("hotel", _repository.AddHotel(hotel));
+            return Created("", _repository.AddHotel(hotel));
         }
 
 
