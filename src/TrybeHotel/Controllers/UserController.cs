@@ -18,6 +18,7 @@ namespace TrybeHotel.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "Admin")]
         public IActionResult GetUsers()
         {
             var user = HttpContext.User.Identity as ClaimsIdentity;
