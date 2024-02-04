@@ -19,7 +19,7 @@ namespace TrybeHotel.Repository
                 Name = h.Name,
                 Address = h.Address,
                 CityId = h.CityId,
-                CityName = h.City.Name,
+                CityName = h.City!.Name,
             });
             return hotels;
         }
@@ -28,15 +28,14 @@ namespace TrybeHotel.Repository
         {
             _context.Hotels.Add(hotel);
             _context.SaveChanges();
+            var city = _context.Cities.FirstOrDefault(c => c.CityId == hotel.CityId);
             return new HotelDto
             {
                 HotelId = hotel.HotelId,
                 Name = hotel.Name,
                 Address = hotel.Address,
                 CityId = hotel.CityId,
-                CityName = (from c in _context.Cities
-                            where c.CityId == hotel.CityId
-                            select c.Name).FirstOrDefault()
+                CityName = city!.Name
             };
         }
     }
